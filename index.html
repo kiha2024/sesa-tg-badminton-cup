@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SESA | TOPGOLF Badminton Cup — HUT RI ke-81</title>
+<style>
+  :root{
+    --red:#D5001C; --red-dark:#9e0015; --red-soft:#ffe5e8;
+    --ink:#1a1a1f; --muted:#7b7b86; --line:#ececef;
+    --gold:#f4b400; --bronze:#cd7f32; --silver:#9aa0a6;
+    --bg:#f6f6f8; --card:#ffffff;
+    --win:#0d8a4f; --win-soft:#e6f6ee;
+    --shadow:0 6px 20px rgba(20,20,40,.08);
+    --radius:16px;
+    --font:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.45}
+
+  .topband{height:8px;background:linear-gradient(90deg,var(--red) 0 50%,#fff 50% 100%)}
+  header.hero{background:radial-gradient(120% 160% at 100% 0%,rgba(255,255,255,.12),transparent 55%),linear-gradient(135deg,var(--red-dark),var(--red));color:#fff;padding:26px 22px 30px;position:relative;overflow:hidden}
+  header.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:230px;height:230px;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 68%)}
+  .hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:6px 12px;border-radius:999px}
+  .eyebrow .flag{width:20px;height:13px;border-radius:2px;overflow:hidden;display:inline-block;box-shadow:0 0 0 1px rgba(255,255,255,.4)}
+  .eyebrow .flag i{display:block;height:50%}
+  .eyebrow .flag i.r{background:#fff}.eyebrow .flag i.w{background:var(--red-dark)}
+  h1.title{margin:14px 0 4px;font-size:clamp(26px,4.4vw,46px);font-weight:800;letter-spacing:-.5px;line-height:1.05}
+  .subtitle{font-size:clamp(14px,1.9vw,18px);opacity:.95;font-weight:600}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .chip{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.28);padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px}
+
+  /* ---- PODIUM ---- */
+  .podium{max-width:1200px;margin:18px auto 0;padding:0 22px}
+  .podium-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .pod{border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line)}
+  .pod.g1{background:linear-gradient(135deg,#fff7df,#ffeeba);border:1.5px solid var(--gold)}
+  .pod.g2{background:linear-gradient(135deg,#f4f5f7,#e9ebee);border:1.5px solid var(--silver)}
+  .pod.g3{background:linear-gradient(135deg,#f9ecdd,#f1dcc4);border:1.5px solid var(--bronze)}
+  .pod .medal{font-size:26px}
+  .pod .lbl{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#7a5c00}
+  .pod.g2 .lbl{color:#5c6066}.pod.g3 .lbl{color:#8a5320}
+  .pod .name{font-size:16px;font-weight:800;color:#3a3a3a}
+  @media(max-width:720px){.podium-inner{grid-template-columns:1fr}}
+
+  .wrap{max-width:1200px;margin:0 auto;padding:22px}
+  .tabs{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px;gap:4px;box-shadow:var(--shadow)}
+  .tab{border:0;background:transparent;padding:10px 20px;border-radius:999px;font-weight:700;font-size:14px;color:var(--muted);cursor:pointer;transition:.15s}
+  .tab.active{background:var(--red);color:#fff}
+  .view{display:none;margin-top:22px}
+  .view.active{display:block}
+
+  .section-title{display:flex;align-items:center;gap:10px;margin:8px 0 14px;font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--red-dark)}
+  .section-title .bar{height:2px;flex:1;background:linear-gradient(90deg,var(--red),transparent)}
+
+  /* ---- GROUPS ---- */
+  .groups{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:820px){.groups{grid-template-columns:1fr}}
+  .gpanel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .gpanel-head{background:linear-gradient(90deg,#20222b,#2c2f3a);color:#fff;text-align:center;padding:11px;font-weight:800;letter-spacing:.14em;font-size:13px}
+  .gpanel-body{padding:14px}
+  .gp-matches{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+
+  .match{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .match.gf{border-color:var(--gold);box-shadow:0 6px 18px rgba(244,180,0,.2)}
+  .match.bronze{border-color:var(--bronze)}
+  .match.dim{opacity:.55}
+  .m-head{display:flex;justify-content:space-between;align-items:center;padding:6px 11px;background:#fafafb;border-bottom:1px solid var(--line);font-size:11px;font-weight:700;color:var(--muted)}
+  .m-head .rnd{color:var(--red-dark)}
+  .m-row{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;gap:8px}
+  .m-row+.m-row{border-top:1px dashed var(--line)}
+  .m-team{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;min-width:0}
+  .m-team .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .m-team.tbd{color:var(--muted);font-weight:500;font-style:italic}
+  .m-row.winner{background:var(--win-soft)}
+  .m-row.winner .m-team{font-weight:800;color:var(--win)}
+  .wins{flex:none;min-width:24px;height:24px;padding:0 6px;border-radius:7px;background:#f0f0f3;font-size:13px;font-weight:800;display:grid;place-items:center}
+  .m-row.winner .wins{background:var(--win);color:#fff}
+  .m-foot{padding:6px 11px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:#fcfcfd}
+  .score-pill{background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-weight:700;color:var(--ink);font-size:12px}
+
+  /* ---- STANDINGS ---- */
+  .stand{width:100%;border-collapse:collapse;font-size:13px}
+  .stand th{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:center;padding:7px 6px;border-bottom:2px solid var(--line);font-weight:800;background:#fafafb}
+  .stand th.l,.stand td.l{text-align:left}
+  .stand td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:center;font-weight:600}
+  .stand tr:last-child td{border-bottom:0}
+  .stand .rk{width:22px;height:22px;border-radius:6px;background:#f0f0f3;font-weight:800;display:inline-grid;place-items:center;font-size:12px}
+  .stand tr.q1 td{background:var(--win-soft)} .stand tr.q1 .rk{background:var(--gold);color:#fff}
+  .stand tr.q2 td{background:#f3fbf6} .stand tr.q2 .rk{background:var(--silver);color:#fff}
+  .stand .tname{font-weight:700}
+  .qbadge{font-size:10px;font-weight:800;color:var(--win);margin-left:6px}
+
+  /* ---- KNOCKOUT ---- */
+  .bracket-scroll{overflow-x:auto;padding-bottom:8px}
+  .stage{display:flex;gap:26px;align-items:stretch;min-width:max-content}
+  .column{display:flex;flex-direction:column;justify-content:space-around;gap:18px;min-width:250px}
+  .col-head{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center}
+  .m-when{font-size:11px}
+
+  /* ---- SCHEDULE ---- */
+  .day{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px}
+  .day-head{display:flex;align-items:center;gap:12px;padding:14px 18px;background:linear-gradient(90deg,var(--red-dark),var(--red));color:#fff}
+  .day-head .d-date{font-size:17px;font-weight:800}
+  .day-head .d-sub{font-size:12px;opacity:.9;font-weight:600}
+  .day-head .d-count{margin-left:auto;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700}
+  table.sch{width:100%;border-collapse:collapse}
+  table.sch th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:11px 14px;border-bottom:2px solid var(--line);font-weight:800;background:#fafafb}
+  table.sch td{padding:13px 14px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
+  table.sch tr:last-child td{border-bottom:0}
+  table.sch tr:hover td{background:#fcfcfd}
+  .t-time{font-weight:800;white-space:nowrap}
+  .t-time small{display:block;font-weight:600;color:var(--muted);font-size:11px}
+  .t-round{display:inline-block;font-size:11px;font-weight:800;color:var(--red-dark);background:var(--red-soft);padding:3px 9px;border-radius:999px}
+  .vs{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .vs .tm{font-weight:700}.vs .tm.tbd{color:var(--muted);font-weight:500;font-style:italic}
+  .vs .tm.won{color:var(--win)}.vs .x{color:var(--muted);font-weight:800;font-size:12px}
+  .t-score{font-weight:800;white-space:nowrap}.t-score small{font-weight:600;color:var(--muted);display:block;font-size:11px}
+  .t-res{font-weight:700;color:var(--win)}.t-res.pending{color:var(--muted);font-weight:600}
+
+  .note{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--muted);margin-top:16px}
+  .note b{color:var(--ink)}
+  footer{max-width:1200px;margin:10px auto 40px;padding:0 22px;color:var(--muted);font-size:12px;text-align:center}
+  .err{background:#fff;border:1px solid var(--red);color:var(--red-dark);padding:14px 16px;border-radius:12px;margin:18px 0}
+
+  /* ---- WINNER / PODIUM TAB ---- */
+  .prizepool{text-align:center;margin:6px 0 4px}
+  .prizepool .lbl{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .prizepool .amt{font-size:clamp(26px,5vw,40px);font-weight:900;color:var(--red-dark);line-height:1.1}
+  .podium3{display:flex;justify-content:center;align-items:flex-end;gap:16px;max-width:820px;margin:30px auto 8px}
+  .pcol{flex:1;max-width:250px;display:flex;flex-direction:column;align-items:center}
+  .pcard{width:100%;background:var(--card);border-radius:14px;border:1.5px solid var(--line);box-shadow:var(--shadow);padding:16px 12px;text-align:center;margin-bottom:10px}
+  .pcard.g1{border-color:var(--gold);background:linear-gradient(180deg,#fffdf3,#fff7df)}
+  .pcard.g2{border-color:var(--silver);background:linear-gradient(180deg,#fcfcfd,#f2f3f5)}
+  .pcard.g3{border-color:var(--bronze);background:linear-gradient(180deg,#fdf8f2,#f9ecdd)}
+  .pcard .medal{font-size:38px;line-height:1}
+  .pcard .team{font-weight:800;font-size:16px;margin:8px 0 8px;min-height:42px;display:flex;align-items:center;justify-content:center}
+  .pcard .team.tbd{color:var(--muted);font-style:italic;font-weight:600}
+  .pcard .prize{font-weight:900;font-size:16px;color:var(--ink)}
+  .pcard .pnote{font-size:12px;color:var(--muted);margin-top:3px;font-weight:600}
+  .ped{width:100%;border-radius:10px 10px 0 0;color:#fff;display:grid;place-items:center;font-size:40px;font-weight:900;box-shadow:inset 0 -7px 0 rgba(0,0,0,.13);text-shadow:0 1px 2px rgba(0,0,0,.2)}
+  .ped.p1{height:150px;background:linear-gradient(180deg,#ffd84d,#f4b400)}
+  .ped.p2{height:112px;background:linear-gradient(180deg,#c9cdd3,#9aa0a6)}
+  .ped.p3{height:86px;background:linear-gradient(180deg,#e0a86b,#cd7f32)}
+  .prizelist{max-width:520px;margin:26px auto 0;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .prizelist .pr{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .prizelist .pr:last-child{border-bottom:0}
+  .prizelist .pr .m{font-size:22px;width:28px;text-align:center}
+  .prizelist .pr .info{flex:1}
+  .prizelist .pr .place{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .prizelist .pr .t{font-weight:800}
+  .prizelist .pr .v{font-weight:900;text-align:right}
+  .prizelist .pr .v small{display:block;font-weight:600;color:var(--muted);font-size:11px}
+  @media(max-width:560px){
+    .podium3{flex-direction:column;align-items:stretch;gap:12px}
+    .pcol{max-width:none}
+    .pcol.c1{order:0}.pcol.c2{order:1}.pcol.c3{order:2}
+    .ped{height:14px!important;font-size:0;border-radius:0 0 10px 10px;box-shadow:inset 0 7px 0 rgba(0,0,0,.13)}
+  }
+  @media(max-width:640px){.wrap{padding:16px}table.sch th:nth-child(2),table.sch td:nth-child(2){display:none}}
+</style>
+</head>
+<body>
+  <div class="topband"></div>
+  <header class="hero"><div class="hero-inner">
+    <span class="eyebrow"><span class="flag"><i class="r"></i><i class="w"></i></span> Dirgahayu Republik Indonesia ke-81</span>
+    <h1 class="title" id="h-title">SESA | TOPGOLF Badminton Cup</h1>
+    <div class="subtitle" id="h-sub"></div>
+    <div class="meta-row" id="h-meta"></div>
+  </div></header>
+
+  <div class="podium" id="podium" style="display:none"><div class="podium-inner" id="podium-inner"></div></div>
+
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab active" data-view="winner">🏆 Juara</button>
+      <button class="tab" data-view="bracket">🏸 Grup & Bagan</button>
+      <button class="tab" data-view="schedule">📅 Jadwal & Skor</button>
+    </div>
+    <div id="view-winner" class="view active"></div>
+    <div id="view-bracket" class="view"></div>
+    <div id="view-schedule" class="view"></div>
+  </div>
+  <footer id="foot"></footer>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const D = window.TOURNAMENT_DATA;
+  const box = document.getElementById('view-bracket');
+  if(!D){ box.innerHTML='<div class="err">Data tidak ditemukan. Pastikan <b>data.js</b> ada di folder yang sama.</div>'; return; }
+  const teams=D.teams, groups=D.groups;
+  const byId={}; D.battles.forEach(b=>byId[b.id]=b);
+  const cache={}, standCache={}, visiting={};
+
+  /* ---------- refs & results ---------- */
+  function teamFromGroup(g,i){ const code=(groups[g]||[])[i]; return {code, name: code?teams[code]:('Tim '+(i+1)+' Grup '+g), tbd:!code}; }
+  function resolveRef(ref){
+    if(ref.g!==undefined) return teamFromGroup(ref.g, ref.i);
+    if(ref.standing){ const [g,rk]=ref.standing; const s=standings(g);
+      if(s.complete) return s.ranked[rk-1];
+      return {code:null, name:(rk===1?'Juara Grup ':'Runner-up Grup ')+g, tbd:true}; }
+    if(ref.winner){ const r=getResult(ref.winner); return r.decided?r.winnerTeam:{code:null,name:'Pemenang '+labelOf(ref.winner),tbd:true}; }
+    if(ref.loser){ const r=getResult(ref.loser); return r.decided?r.loserTeam:{code:null,name:'Kalah '+labelOf(ref.loser),tbd:true}; }
+    return {code:null,name:'TBD',tbd:true};
+  }
+  function labelOf(id){ return byId[id]?byId[id].round:id; }
+  function getResult(id){
+    if(cache[id]) return cache[id];
+    if(visiting[id]) return {decided:false,teamA:{tbd:true,name:'TBD'},teamB:{tbd:true,name:'TBD'},aWins:0,bWins:0,pointsA:0,pointsB:0,played:[]};
+    visiting[id]=true;
+    const b=byId[id];
+    const teamA=resolveRef(b.a), teamB=resolveRef(b.b);
+    let aWins=0,bWins=0,pointsA=0,pointsB=0; const played=[];
+    (b.matches||[]).forEach(m=>{
+      const av=m.a,bv=m.b;
+      if(av!==null&&bv!==null&&av!==''&&bv!==''&&!isNaN(av)&&!isNaN(bv)){
+        const A=Number(av),B=Number(bv); played.push(A+'-'+B);
+        pointsA+=A; pointsB+=B; if(A>B)aWins++; else if(B>A)bWins++;
+      }
+    });
+    const known=!teamA.tbd&&!teamB.tbd;
+    const decided=known&&(aWins>=2||bWins>=2);
+    const side=decided?(aWins>=2?'A':'B'):null;
+    const res={id,teamA,teamB,aWins,bWins,pointsA,pointsB,played,decided,winnerSide:side,
+      winnerTeam:side==='A'?teamA:side==='B'?teamB:null,
+      loserTeam: side==='A'?teamB:side==='B'?teamA:null};
+    visiting[id]=false; cache[id]=res; return res;
+  }
+
+  /* ---------- group standings (standard tiebreakers) ---------- */
+  function groupBattles(g){ return D.battles.filter(b=>b.stage==='group'&&b.group===g); }
+  function standings(g){
+    if(standCache[g]) return standCache[g];
+    const codes=(groups[g]||[]).slice();
+    const st={}; codes.forEach(c=>st[c]={code:c,name:teams[c]||c,bw:0,bp:0,gw:0,gl:0,pf:0,pa:0});
+    const bts=groupBattles(g); let complete=true;
+    // pairwise battle winner map for head-to-head
+    const h2h={}; // key "X|Y" -> winner code
+    bts.forEach(b=>{
+      const r=getResult(b.id); const A=r.teamA.code,Bc=r.teamB.code;
+      if(!A||!Bc||!st[A]||!st[Bc]) return;
+      st[A].gw+=r.aWins; st[A].gl+=r.bWins; st[A].pf+=r.pointsA; st[A].pa+=r.pointsB;
+      st[Bc].gw+=r.bWins; st[Bc].gl+=r.aWins; st[Bc].pf+=r.pointsB; st[Bc].pa+=r.pointsA;
+      if(r.decided){ st[r.winnerTeam.code].bw++; st[A].bp++; st[Bc].bp++; h2h[A+'|'+Bc]=r.winnerTeam.code; h2h[Bc+'|'+A]=r.winnerTeam.code; }
+      else complete=false;
+    });
+    if(bts.length<codes.length*(codes.length-1)/2) complete=false;
+    codes.forEach(c=>{ st[c].gd=st[c].gw-st[c].gl; st[c].pd=st[c].pf-st[c].pa; });
+
+    // base sort
+    let arr=codes.map(c=>st[c]);
+    arr.sort((x,y)=> y.bw-x.bw || y.gd-x.gd || y.pd-x.pd || codes.indexOf(x.code)-codes.indexOf(y.code));
+    // refine ties on bw using mini-league (head-to-head among tied)
+    const out=[]; let i=0;
+    while(i<arr.length){
+      let j=i; while(j+1<arr.length && arr[j+1].bw===arr[i].bw) j++;
+      if(j>i){
+        const tied=arr.slice(i,j+1); const tcodes=tied.map(t=>t.code);
+        const mini={}; tcodes.forEach(c=>mini[c]={bw:0,gw:0,gl:0,pf:0,pa:0});
+        bts.forEach(b=>{ const r=getResult(b.id); const A=r.teamA.code,Bc=r.teamB.code;
+          if(tcodes.indexOf(A)>-1&&tcodes.indexOf(Bc)>-1){
+            mini[A].gw+=r.aWins;mini[A].gl+=r.bWins;mini[A].pf+=r.pointsA;mini[A].pa+=r.pointsB;
+            mini[Bc].gw+=r.bWins;mini[Bc].gl+=r.aWins;mini[Bc].pf+=r.pointsB;mini[Bc].pa+=r.pointsA;
+            if(r.decided) mini[r.winnerTeam.code].bw++;
+          }});
+        tied.sort((x,y)=>{
+          const mx=mini[x.code],my=mini[y.code];
+          return my.bw-mx.bw || ((my.gw-my.gl)-(mx.gw-mx.gl)) || ((my.pf-my.pa)-(mx.pf-mx.pa))
+                 || (y.gd-x.gd) || (y.pd-x.pd) || (tcodes.indexOf(x.code)-tcodes.indexOf(y.code));
+        });
+        tied.forEach(t=>out.push(t));
+      } else out.push(arr[i]);
+      i=j+1;
+    }
+    const ranked=out.map(t=>({code:t.code,name:t.name,tbd:false,bw:t.bw,bp:t.bp,gw:t.gw,gl:t.gl,gd:t.gd,pf:t.pf,pa:t.pa,pd:t.pd}));
+    const r={ranked,complete}; standCache[g]=r; return r;
+  }
+
+  /* ---------- header ---------- */
+  document.getElementById('h-title').textContent=D.meta.title||'Badminton Cup';
+  document.getElementById('h-sub').textContent=D.meta.subtitle||'';
+  document.title=(D.meta.title||'Badminton')+' — HUT RI';
+  const shortDate=iso=>new Date(iso+'T00:00:00').toLocaleDateString('id-ID',{day:'numeric',month:'short'});
+  const fmtDate=iso=>new Date(iso+'T00:00:00').toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const mc=[]; if(D.meta.format)mc.push('🏆 '+D.meta.format); if(D.meta.venue)mc.push('📍 '+D.meta.venue);
+  if(D.meta.dates)mc.push('🗓️ '+D.meta.dates.map(shortDate).join(' · ')+' 2026'); mc.push('⏰ 19:00 – 21:00');
+  document.getElementById('h-meta').innerHTML=mc.map(c=>'<span class="chip">'+c+'</span>').join('');
+  document.getElementById('foot').innerHTML=(D.meta.org||'')+' · '+(D.meta.title||'')+' · Independence Day '+(D.meta.year||'')+' 🇮🇩';
+
+  /* ---------- card renderers ---------- */
+  function teamRow(team,res,side){
+    const win=res.decided&&res.winnerSide===side; const wins=side==='A'?res.aWins:res.bWins;
+    return '<div class="m-row'+(win?' winner':'')+'"><div class="m-team'+(team.tbd?' tbd':'')+'">'+
+      '<span class="nm">'+team.name+'</span></div><span class="wins">'+(res.played.length?wins:'·')+'</span></div>';
+  }
+  function matchCard(b,opts){opts=opts||{};
+    const r=getResult(b.id); const when=b.schedule?(shortDate(b.schedule.date)+' · '+b.schedule.time):'';
+    const cls=b.id==='FINAL'?' gf':(b.id==='THIRD'?' bronze':'');
+    const scores=r.played.length?r.played.map(s=>'<span class="score-pill">'+s+'</span>').join(''):'<span class="m-when">Belum dimainkan</span>';
+    return '<div class="match'+cls+(opts.dim?' dim':'')+'"><div class="m-head"><span class="rnd">'+b.round+'</span><span>'+when+'</span></div>'+
+      teamRow(r.teamA,r,'A')+teamRow(r.teamB,r,'B')+'<div class="m-foot">'+scores+'</div></div>';
+  }
+  function standTable(g){
+    const s=standings(g);
+    const rows=s.ranked.map((t,idx)=>{
+      const cls=idx===0?'q1':(idx===1?'q2':'');
+      const q=idx<2?'<span class="qbadge">'+(idx===0?'Juara':'Runner-up')+'</span>':'';
+      return '<tr class="'+cls+'"><td><span class="rk">'+(idx+1)+'</span></td>'+
+        '<td class="l tname">'+t.name+q+'</td><td>'+t.bp+'</td><td>'+t.bw+'</td>'+
+        '<td>'+(t.gd>0?'+':'')+t.gd+'</td><td>'+t.pf+'</td></tr>';
+    }).join('');
+    return '<table class="stand"><thead><tr><th>#</th><th class="l">Tim</th><th>Main</th><th>Menang</th><th>+/- Game</th><th>Poin</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+  function groupPanel(g){
+    const bts=groupBattles(g).map(b=>matchCard(b)).join('');
+    return '<div class="gpanel"><div class="gpanel-head">GRUP '+g+'</div><div class="gpanel-body">'+
+      '<div class="gp-matches">'+bts+'</div>'+standTable(g)+'</div></div>';
+  }
+
+  /* ---------- BRACKET / GROUP VIEW ---------- */
+  box.innerHTML=
+    '<div class="section-title">👥 Babak Grup (Round-Robin) <span class="bar"></span></div>'+
+    '<div class="groups">'+groupPanel('A')+groupPanel('B')+'</div>'+
+    '<div class="section-title" style="margin-top:26px">🏆 Babak Gugur <span class="bar"></span></div>'+
+    '<div class="bracket-scroll"><div class="stage">'+
+      '<div class="column"><div class="col-head">Semifinal</div>'+matchCard(byId['SF1'])+matchCard(byId['SF2'])+'</div>'+
+      '<div class="column"><div class="col-head">Final</div>'+matchCard(byId['FINAL'])+
+        '<div class="col-head" style="margin-top:8px">Perebutan Juara 3</div>'+matchCard(byId['THIRD'])+'</div>'+
+    '</div></div>'+
+    '<div class="note"><b>Cara update:</b> buka <b>data.js</b> → isi <b>groups</b> (hasil undian) & skor di <b>matches</b> (contoh <b>{ "a": 21, "b": 15 }</b>). Klasemen grup, semifinal silang, final & juara 3 terisi otomatis. Menang 2 match untuk menang laga (jika 1-1 tambah match ke-3).</div>';
+
+  /* ---------- PODIUM ---------- */
+  const fin=getResult('FINAL'), thd=getResult('THIRD');
+  if(fin.decided){
+    const pod=[{c:'g1',m:'🥇',l:'Juara 1',n:fin.winnerTeam.name},{c:'g2',m:'🥈',l:'Juara 2',n:fin.loserTeam.name}];
+    if(thd.decided) pod.push({c:'g3',m:'🥉',l:'Juara 3',n:thd.winnerTeam.name});
+    document.getElementById('podium').style.display='block';
+    document.getElementById('podium-inner').innerHTML=pod.map(p=>'<div class="pod '+p.c+'"><div class="medal">'+p.m+'</div><div><div class="lbl">'+p.l+'</div><div class="name">'+p.n+'</div></div></div>').join('');
+  }
+
+  /* ---------- SCHEDULE ---------- */
+  const sview=document.getElementById('view-schedule');
+  const dates=(D.meta.dates||[]).slice();
+  D.battles.forEach(b=>{ if(b.schedule&&dates.indexOf(b.schedule.date)===-1)dates.push(b.schedule.date); });
+  let sh='';
+  dates.forEach((date,i)=>{
+    let rows=D.battles.filter(b=>b.schedule&&b.schedule.date===date);
+    if(!rows.length) return;
+    rows.sort((a,b)=>(a.schedule.time||'').localeCompare(b.schedule.time||''));
+    const body=rows.map(b=>{ const r=getResult(b.id);
+      const aWon=r.decided&&r.winnerSide==='A',bWon=r.decided&&r.winnerSide==='B';
+      const sc=r.played.length?'<span class="t-score">'+r.aWins+'–'+r.bWins+'<small>'+r.played.join(' , ')+'</small></span>':'<span class="t-score" style="color:var(--muted)">—</span>';
+      const rc=r.decided?'<span class="t-res">'+r.winnerTeam.name+' ✔</span>':'<span class="t-res pending">Menunggu</span>';
+      return '<tr><td class="t-time">'+b.schedule.time+'<small>'+(b.schedule.court||'')+'</small></td>'+
+        '<td><span class="t-round">'+b.round+'</span></td>'+
+        '<td><div class="vs"><span class="tm'+(r.teamA.tbd?' tbd':'')+(aWon?' won':'')+'">'+r.teamA.name+'</span><span class="x">VS</span><span class="tm'+(r.teamB.tbd?' tbd':'')+(bWon?' won':'')+'">'+r.teamB.name+'</span></div></td>'+
+        '<td>'+sc+'</td><td>'+rc+'</td></tr>';
+    }).join('');
+    sh+='<div class="day"><div class="day-head"><div><div class="d-date">'+fmtDate(date)+'</div><div class="d-sub">Sesi '+(i+1)+' · 19:00 – 21:00 WIB</div></div><span class="d-count">'+rows.length+' laga</span></div>'+
+      '<div style="overflow-x:auto"><table class="sch"><thead><tr><th>Waktu</th><th>Babak</th><th>Pertandingan</th><th>Skor</th><th>Hasil</th></tr></thead><tbody>'+body+'</tbody></table></div></div>';
+  });
+  sview.innerHTML=sh+'<div class="note"><b>Catatan:</b> Skor & hasil otomatis dari <b>data.js</b>. Tanggal/jam bisa diubah di bagian <b>schedule</b> tiap laga.</div>';
+
+  /* ---------- WINNER / PODIUM VIEW ---------- */
+  const wview=document.getElementById('view-winner');
+  const rupiah=n=> (n||n===0)?('Rp'+Number(n).toLocaleString('id-ID')):'—';
+  const P=D.meta.prizes||{};
+  const finR2=getResult('FINAL'), thdR2=getResult('THIRD');
+  const podData=[
+    { rank:1, colcls:'c1', cls:'g1', medal:'🥇', ped:'p1', place:'Juara 1', team: finR2.decided?finR2.winnerTeam:null, prize:P.first },
+    { rank:2, colcls:'c2', cls:'g2', medal:'🥈', ped:'p2', place:'Juara 2', team: finR2.decided?finR2.loserTeam:null,  prize:P.second },
+    { rank:3, colcls:'c3', cls:'g3', medal:'🥉', ped:'p3', place:'Juara 3', team: thdR2.decided?thdR2.winnerTeam:null, prize:P.third }
+  ];
+  const total=(P.first&&P.first.amount||0)+(P.second&&P.second.amount||0)+(P.third&&P.third.amount||0);
+  function podCol(p){
+    const known=p.team&&!p.team.tbd;
+    const name= known? p.team.name : 'Belum ditentukan';
+    const amt = p.prize? rupiah(p.prize.amount):'—';
+    const note= p.prize&&p.prize.note? '<div class="pnote">'+p.prize.note+'</div>':'';
+    return '<div class="pcol '+p.colcls+'">'+
+      '<div class="pcard '+p.cls+'"><div class="medal">'+p.medal+'</div>'+
+      '<div class="team'+(known?'':' tbd')+'">'+name+'</div>'+
+      '<div class="prize">'+amt+'</div>'+note+'</div>'+
+      '<div class="ped '+p.ped+'">'+p.rank+'</div></div>';
+  }
+  const prizeRows=podData.map(p=>{
+    const known=p.team&&!p.team.tbd;
+    const note=p.prize&&p.prize.note?'<small>'+p.prize.note+'</small>':'';
+    return '<div class="pr"><span class="m">'+p.medal+'</span><div class="info"><div class="place">'+p.place+'</div>'+
+      '<div class="t">'+(known?p.team.name:'Belum ditentukan')+'</div></div>'+
+      '<div class="v">'+(p.prize?rupiah(p.prize.amount):'—')+note+'</div></div>';
+  }).join('');
+  wview.innerHTML=
+    '<div class="section-title">🏆 Podium Juara <span class="bar"></span></div>'+
+    '<div class="prizepool"><div class="lbl">Total Prize Pool</div><div class="amt">'+rupiah(total)+'</div></div>'+
+    '<div class="podium3">'+podCol(podData[1])+podCol(podData[0])+podCol(podData[2])+'</div>'+
+    '<div class="prizelist">'+prizeRows+'</div>'+
+    (finR2.decided?'':'<div class="note" style="max-width:520px;margin:20px auto 0;text-align:center">Podium & juara terisi <b>otomatis</b> setelah Final dan perebutan Juara 3 selesai (skor diisi di <b>data.js</b>).</div>');
+
+  /* ---------- tabs ---------- */
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active'); document.getElementById('view-'+t.dataset.view).classList.add('active');
+  }));
+})();
+</script>
+</body>
+</html>
