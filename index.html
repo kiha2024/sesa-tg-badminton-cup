@@ -286,7 +286,7 @@
   const shortDate=iso=>new Date(iso+'T00:00:00').toLocaleDateString('id-ID',{day:'numeric',month:'short'});
   const fmtDate=iso=>new Date(iso+'T00:00:00').toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
   const mc=[]; if(D.meta.format)mc.push('🏆 '+D.meta.format); if(D.meta.venue)mc.push('📍 '+D.meta.venue);
-  if(D.meta.dates)mc.push('🗓️ '+D.meta.dates.map(shortDate).join(' · ')+' 2026'); mc.push('⏰ 19:00 – 21:00');
+  if(D.meta.dates)mc.push('🗓️ '+D.meta.dates.map(shortDate).join(' · ')+' 2026'); mc.push('⏰ 19:00 – 22:00 WIB');
   document.getElementById('h-meta').innerHTML=mc.map(c=>'<span class="chip">'+c+'</span>').join('');
   document.getElementById('foot').innerHTML=(D.meta.org||'')+' · '+(D.meta.title||'')+' · Independence Day '+(D.meta.year||'')+' 🇮🇩';
 
@@ -359,7 +359,7 @@
         '<td><div class="vs"><span class="tm'+(r.teamA.tbd?' tbd':'')+(aWon?' won':'')+'">'+r.teamA.name+'</span><span class="x">VS</span><span class="tm'+(r.teamB.tbd?' tbd':'')+(bWon?' won':'')+'">'+r.teamB.name+'</span></div></td>'+
         '<td>'+sc+'</td><td>'+rc+'</td></tr>';
     }).join('');
-    sh+='<div class="day"><div class="day-head"><div><div class="d-date">'+fmtDate(date)+'</div><div class="d-sub">Sesi '+(i+1)+' · 19:00 – 21:00 WIB</div></div><span class="d-count">'+rows.length+' laga</span></div>'+
+    sh+='<div class="day"><div class="day-head"><div><div class="d-date">'+fmtDate(date)+'</div><div class="d-sub">Sesi '+(i+1)+' · 19:00 – 22:00 WIB</div></div><span class="d-count">'+rows.length+' laga</span></div>'+
       '<div style="overflow-x:auto"><table class="sch"><thead><tr><th>Waktu</th><th>Babak</th><th>Pertandingan</th><th>Skor</th><th>Hasil</th></tr></thead><tbody>'+body+'</tbody></table></div></div>';
   });
   sview.innerHTML=sh+'<div class="note"><b>Catatan:</b> Skor & hasil otomatis dari <b>data.js</b>. Tanggal/jam bisa diubah di bagian <b>schedule</b> tiap laga.</div>';
