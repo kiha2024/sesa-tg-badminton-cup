@@ -59,7 +59,7 @@ window.TOURNAMENT_DATA = {
     T4: "SYAILENDRA & AMADI",
     T5: "AKMAL & AZMI",
     T6: "ERVIN & GOVAR",
-    T7: "DDIK & FAJAR",
+    T7: "DIDIK & FAJAR",
     T8: "FERRY & ZIKRULL"
   },
 
