@@ -39,7 +39,7 @@ window.TOURNAMENT_DATA = {
     year: 2026,
     venue: "LEO HALL",
     format: "Group Stage · 2 Grup x 4 Tim · Best of 3",
-    dates: ["2026-08-13", "2026-08-20"],
+    dates: ["2026-08-13", "2026-08-20", "2026-08-27"],
 
     /* ---- HADIAH / PRIZE POOL (edit di sini) ----
        "amount" = nilai dalam Rupiah (angka saja, tanpa titik).
@@ -121,37 +121,37 @@ window.TOURNAMENT_DATA = {
     {
       id: "B1", stage: "group", group: "B", round: "Grup B · Laga 1",
       a: { g: "B", i: 0 }, b: { g: "B", i: 1 },
-      schedule: { date: "2026-08-13", time: "19:00", court: "Court 2" },
+      schedule: { date: "2026-08-20", time: "19:00", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     },
     {
       id: "B2", stage: "group", group: "B", round: "Grup B · Laga 2",
       a: { g: "B", i: 0 }, b: { g: "B", i: 2 },
-      schedule: { date: "2026-08-13", time: "19:30", court: "Court 2" },
+      schedule: { date: "2026-08-20", time: "19:30", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     },
     {
       id: "B3", stage: "group", group: "B", round: "Grup B · Laga 3",
       a: { g: "B", i: 0 }, b: { g: "B", i: 3 },
-      schedule: { date: "2026-08-13", time: "20:00", court: "Court 2" },
+      schedule: { date: "2026-08-20", time: "20:00", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     },
     {
       id: "B4", stage: "group", group: "B", round: "Grup B · Laga 4",
       a: { g: "B", i: 1 }, b: { g: "B", i: 2 },
-      schedule: { date: "2026-08-13", time: "20:30", court: "Court 2" },
+      schedule: { date: "2026-08-20", time: "20:30", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     },
     {
       id: "B5", stage: "group", group: "B", round: "Grup B · Laga 5",
       a: { g: "B", i: 1 }, b: { g: "B", i: 3 },
-      schedule: { date: "2026-08-13", time: "21:00", court: "Court 2" },
+      schedule: { date: "2026-08-20", time: "21:00", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     },
     {
       id: "B6", stage: "group", group: "B", round: "Grup B · Laga 6",
       a: { g: "B", i: 2 }, b: { g: "B", i: 3 },
-      schedule: { date: "2026-08-13", time: "21:30", court: "Court 2" },
+      schedule: { date: "2026-08-20", time: "21:30", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     },
 
@@ -159,13 +159,13 @@ window.TOURNAMENT_DATA = {
     {
       id: "SF1", stage: "ko", round: "Semifinal 1",
       a: { standing: ["A", 1] }, b: { standing: ["B", 2] },
-      schedule: { date: "2026-08-20", time: "19:00", court: "Court 1" },
+      schedule: { date: "2026-08-27", time: "19:00", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     },
     {
       id: "SF2", stage: "ko", round: "Semifinal 2",
       a: { standing: ["A", 2] }, b: { standing: ["B", 1] },
-      schedule: { date: "2026-08-20", time: "19:45", court: "Court 1" },
+      schedule: { date: "2026-08-27", time: "19:45", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     },
 
@@ -173,13 +173,13 @@ window.TOURNAMENT_DATA = {
     {
       id: "THIRD", stage: "ko", round: "Perebutan Juara 3",
       a: { loser: "SF1" }, b: { loser: "SF2" },
-      schedule: { date: "2026-08-20", time: "20:30", court: "Court 1" },
+      schedule: { date: "2026-08-27", time: "20:30", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     },
     {
       id: "FINAL", stage: "ko", round: "Final",
       a: { winner: "SF1" }, b: { winner: "SF2" },
-      schedule: { date: "2026-08-20", time: "21:00", court: "Court 1" },
+      schedule: { date: "2026-08-27", time: "21:15", court: "Court 1" },
       matches: [{ a: null, b: null }, { a: null, b: null }, { a: null, b: null }]
     }
 

@@ -17,12 +17,12 @@ README.txt   -> this file.
 - Semua laga best-of-3 (menang 2 match; jika 1-1 tambah match ke-3).
 
 === JADWAL ===
-- Setiap sesi: 19:00 - 22:00 WIB, 1 laga tiap 30 menit.
-- 13 Agu 2026 -> SEMUA laga grup, 2 lapangan paralel:
-    Court 1 = Grup A (6 laga)   |   Court 2 = Grup B (6 laga)
+- Setiap sesi: 19:00 - 22:00 WIB, 1 lapangan (Court 1).
+- 13 Agu 2026 -> Grup A, 6 laga tiap 30 menit:
     19:00 · 19:30 · 20:00 · 20:30 · 21:00 · 21:30
-- 20 Agu 2026 -> Knockout, Court 1:
-    Semifinal 1 (19:00), Semifinal 2 (19:45), Juara 3 (20:30), Final (21:00)
+- 20 Agu 2026 -> Grup B, jam sama seperti di atas.
+- 27 Agu 2026 -> Knockout:
+    Semifinal 1 (19:00), Semifinal 2 (19:45), Juara 3 (20:30), Final (21:15)
 
 === HOW TO USE ===
 1. Double-click index.html (offline, no internet).
